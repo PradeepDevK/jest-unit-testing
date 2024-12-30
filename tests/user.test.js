@@ -18,3 +18,13 @@ test('returns user data for a given userId', async () => {
     'https://jsonplaceholder.typicode.com/users/1'
   );
 });
+
+test('handles errors when fetching user data', async () => {
+  fetchData.mockRejectedValue(new Error('Network Error'));
+
+  try {
+    await getUserData(1);
+  } catch (err) {
+    expect(err.message).toBe('Unable to fetch user data.');
+  }
+});

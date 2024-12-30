@@ -5,9 +5,13 @@
 const fetchData = require('./fetchData');
 
 async function getUserData(userId) {
-  const url = `https://jsonplaceholder.typicode.com/users/${userId}`;
-  const data = await fetchData(url);
-  return data;
+  try {
+    const url = `https://jsonplaceholder.typicode.com/users/${userId}`;
+    const data = await fetchData(url);
+    return data;
+  } catch (err) {
+    throw new Error('Unable to fetch user data.');
+  }
 }
 
 module.exports = getUserData;
